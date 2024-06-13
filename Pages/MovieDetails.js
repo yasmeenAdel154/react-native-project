@@ -10,7 +10,7 @@ export default function MovieDetails({ navigation, route }) {
     console.log(movieID);
 
     useEffect(() => {
-        axios.get(`https://api.themoviedb.org/3/movie/${movieID}?api_key=aa6fc65fcedb7431af3ac2fbe6484cd0`)
+        axios.get(`https://dummyjson.com/products/${movieID}?`)
 
             .then((res) => { setMovieDetails(res.data) })
             .catch((err) => { alert(JSON.stringify(err)) })
@@ -19,17 +19,27 @@ export default function MovieDetails({ navigation, route }) {
     console.log(movieDetails)
     return (
         <View>
+            { movieDetails.images && movieDetails.images.length > 0 }
+            
             <Card>
-                <Card.Title> {movieDetails.original_title 
+                <Card.Title> {movieDetails.title 
                 } </Card.Title>
                 <Card.Divider />
-                <Card.Image source={{
-                    uri: movieDetails.backdrop_path
-                }} />
+                {/* <Card.Image style={{width:300,height:300}}
+                                source={{ uri: movieDetails.images[0] }} /> */}
+                {movieDetails.images && movieDetails.images.length > 0 ? (
+                    <Card.Image
+                        style={{ width: 300, height: 300 }}
+                        source={{ uri: movieDetails.images[0] }}
+                    />
+                ) : (
+                    <Text>No image available</Text>
+                )}
                 <View>
-                    <Text>{movieDetails.overview
+                    <Text>{movieDetails.description
+
                     }</Text>
-                    <Text style={{ fontWeight: "bold" }}> Rate: {movieDetails.vote_average
+                    <Text style={{ fontWeight: "bold" }}> Price: {movieDetails.price
                     } </Text>
                 </View>
             </Card>

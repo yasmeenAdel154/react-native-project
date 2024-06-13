@@ -11,9 +11,14 @@ export default function Movies({ navigation }) {
     //const [favMovies,setfavMovies] = useState([])
     let favMovies = useSelector((state) => state.myFavoriteMoviesReducer.FavoriteMovies);
     const dispatch = useDispatch();
+    // useEffect(() => {
+    //     axios.get("https://api.themoviedb.org/3/movie/popular?api_key=aa6fc65fcedb7431af3ac2fbe6484cd0&language=en-US&page=1")
+    //         .then((info) => setMovies(info.data.results))
+    //         .catch((err) => alert(err))
+    // }, [])
     useEffect(() => {
-        axios.get("https://api.themoviedb.org/3/movie/popular?api_key=aa6fc65fcedb7431af3ac2fbe6484cd0&language=en-US&page=1")
-            .then((info) => setMovies(info.data.results))
+        axios.get("https://dummyjson.com/products")
+            .then((info) => setMovies(info.data.products))
             .catch((err) => alert(err))
     }, [])
     console.log(movies)
@@ -43,23 +48,28 @@ export default function Movies({ navigation }) {
 
 
     return (
-        <ScrollView>
+        <ScrollView >
 
-            <Text>Companies</Text>
+            <Text>Products</Text>
+            <View style={{display:"flex" }}>
+                
             {
+                
                 movies.map((movie, index) => {
                     return (
                         <Card>
                             <Card.Title> {movie.title} </Card.Title>
                             <Card.Divider />
-                            <Card.Image
-                                source={{ uri: movie.backdrop_path }} />
-                            <Button title="Details" onPress={() => navigation.navigate("MovieDetails", { id: movie.id })} />
+                            <Card.Image style={{width:300,height:300}}
+                                source={{ uri: movie.images[0] }} />
+                            <Button title="Details" onPress={() => navigation.navigate("ProductsDetails", { id: movie.id })} />
                             <Icon style={movie.fav ? styles.icon : styles.darkIcon} name='heart' onPress={() => updateFavoriteMovies(movie.id)} />
                         </Card>
                     )
                 }
                 )}
+            </View>
+           
 
         </ScrollView>
     )

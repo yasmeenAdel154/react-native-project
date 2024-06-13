@@ -27,9 +27,9 @@ export default function FavoriteMoviesList({ navigation }) {
                     <Card>
                         <Card.Title> {movie.title} </Card.Title>
                         <Card.Divider />
-                        <Card.Image
-                            source={{ uri: movie.backdrop_path }} />
-                        <Button title="Details" onPress={() => navigation.navigate("MovieDetails", { id: movie.id })} />
+                        <Card.Image style={{ width: 300, height: 300 }}
+                            source={{ uri: movie.images[0]}} />
+                        <Button title="Details" onPress={() => navigation.navigate("ProductsDetails", { id: movie.id })} />
                         <Icon style={movie.fav ? styles.icon : styles.darkIcon} name='heart' onPress={() => updateFavoriteMovies(movie.id)} />
                     </Card>
                 )
