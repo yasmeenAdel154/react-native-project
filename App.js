@@ -10,6 +10,8 @@ import store from './Store/Store.js';
 import FavoriteMoviesList from './Pages/FavoriteMovie.js';
 import Search from './Pages/Search.js';
 import Cart from './Pages/Cart.js';
+import LoginForm from './Pages/Login2.js';
+import SignUp from './Pages/SignUp2.js';
 // ايه الفرق لما اعملها يقوسين او لا
 export default function App() {
 
@@ -25,16 +27,29 @@ export default function App() {
        </Stack.Navigator> 
      )
    }
+   const MainStack2 = () => {
+    return (
+      <Stack.Navigator> 
+        <Stack.Screen name="Login" component={LoginForm} />
+        <Stack.Screen name="Products" component={Movies} />
+        <Stack.Screen name="ProductsDetails"
+        component={MovieDetails} />    
+      </Stack.Navigator> 
+    )
+  }
         
 
   return (
     <Provider store={store}>
         <NavigationContainer>
              <Drawer.Navigator>
+                      <Drawer.Screen name="Login " component={MainStack2}/>
+                      <Drawer.Screen name="Sign UP " component={SignUp}/>
                       <Drawer.Screen name="Products List" component={MainStack}/>
                       <Drawer.Screen name="Cart" component={Cart}/>
                       <Drawer.Screen name="Favorite Products List" component={FavoriteMoviesList}/>
                       <Drawer.Screen name="Search" component={Search}/>
+                      
                       {/* <Drawer.Screen name="Movies List2" component={MainStack}/> */}
                       
              </Drawer.Navigator>
